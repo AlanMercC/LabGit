@@ -1,0 +1,14 @@
+name: Slack notification
+on: [pull_request]
+jobs:
+  notify:
+    runs-on: ubuntu-lastest
+    steps:
+      - name: Notify on slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: "#FF0000"
+          SLACK_MESSAGE: "A NEW PULL REQUEST NEEDS REVIEW: ${{ github.event.pullrequest.html_url }}"
+          SLACK_TITLE: "Review needed"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
